@@ -1,0 +1,451 @@
+<html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unique Elegant Interiors</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+    h1,
+    h2 {
+      font-family: 'Playfair Display', serif;
+      color: #2c2c2c;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    section {
+      padding: 80px 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    nav .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #b2885f;
+    }
+
+    /* Hero */
+    .hero {
+      height: 90vh;
+      background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(270deg, rgba(178, 136, 95, 0.3), rgba(255, 255, 255, 0.1), rgba(178, 136, 95, 0.3));
+      background-size: 600% 600%;
+      animation: gradientAnim 15s ease infinite;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin: 20px 0;
+      text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn {
+      padding: 12px 30px;
+      background: #b2885f;
+      color: #fff;
+      font-weight: 500;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      background: #9c6f4b;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Gradient Animation */
+    @keyframes gradientAnim {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* About */
+    .about {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .about img {
+      flex: 1;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    /* Services */
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .service-box {
+      flex: 1 1 250px;
+      background: #f5f5f5;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .service-box h3 {
+      margin: 15px 0;
+    }
+
+    /* Portfolio */
+    .portfolio-controls {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .portfolio-controls button {
+      margin: 0 10px;
+      padding: 8px 20px;
+      border: none;
+      background: #b2885f;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .portfolio-controls button.active,
+    .portfolio-controls button:hover {
+      background: #9c6f4b;
+    }
+
+    .portfolio {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.5s;
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      border-radius: 8px;
+      transition: transform 0.5s, box-shadow 0.5s;
+    }
+
+    .portfolio-item:hover {
+      transform: scale(1.05) translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .portfolio-item span {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    /* Contact */
+    .contact form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact input,
+    .contact textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    .contact button {
+      align-self: flex-start;
+    }
+
+    /* Footer */
+    footer {
+      background: #2c2c2c;
+      color: #fff;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    footer a {
+      color: #fff;
+      margin: 0 10px;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: #b2885f;
+    }
+
+    /* Responsive */
+    @media(max-width:768px) {
+      .about {
+        flex-direction: column;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-container container">
+      <a href="#hero"><strong>Unique Interiors</strong></a>
+      <div>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero visible" id="hero">
+    <div class="hero-content">
+      <h1>Transforming Spaces Elegantly</h1>
+      <p>Classy interior designs with timeless beauty</p>
+      <a href="#portfolio" class="btn">View Portfolio</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container about">
+      <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=600&q=80" alt="About Image">
+      <div class="about-text">
+        <h2>About Us</h2>
+        <p>We create interiors that blend elegance, comfort, and style. Each project is uniquely designed with attention to detail and a passion for beauty.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="container text-center">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="service-box">
+        <h3>Residential Design</h3>
+        <p>Elegant home designs tailored to your lifestyle and taste.</p>
+      </div>
+      <div class="service-box">
+        <h3>Commercial Design</h3>
+        <p>Professional and classy interiors for offices and shops.</p>
+      </div>
+      <div class="service-box">
+        <h3>Consultation</h3>
+        <p>Expert guidance for creating your dream interior spaces.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section id="portfolio" class="container text-center">
+    <h2>Our Portfolio</h2>
+    <div class="portfolio-controls">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="residential">Residential</button>
+      <button data-filter="commercial">Commercial</button>
+    </div>
+    <div class="portfolio">
+      <div class="portfolio-item" data-category="residential">
+        <img src="https://images.unsplash.com/photo-1598300053632-5ec3de14bb2b?auto=format&fit=crop&w=400&q=80" alt="Project 1">
+        <span>Residential</span>
+      </div>
+      <div class="portfolio-item" data-category="commercial">
+        <img src="https://images.unsplash.com/photo-1572120360610-d971b9c8b2c8?auto=format&fit=crop&w=400&q=80" alt="Project 2">
+        <span>Commercial</span>
+      </div>
+      <div class="portfolio-item" data-category="residential">
+        <img src="https://images.unsplash.com/photo-1600585154227-3c35f8cf36ed?auto=format&fit=crop&w=400&q=80" alt="Project 3">
+        <span>Residential</span>
+      </div>
+      <div class="portfolio-item" data-category="commercial">
+        <img src="https://images.unsplash.com/photo-1600585154497-c5e8b7b0b50f?auto=format&fit=crop&w=400&q=80" alt="Project 4">
+        <span>Commercial</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="container text-center">
+    <h2>Contact Us</h2>
+    <form class="contact">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="4" placeholder="Message" required></textarea>
+      <button class="btn" type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Unique Interiors | <a href="#">Instagram</a> | <a href="#">Pinterest</a> | <a href="#">Facebook</a></p>
+  </footer>
+
+  <!-- JS for animations & portfolio filter -->
+  <script>
+    // Scroll animations
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+    sections.forEach(section => observer.observe(section));
+    // Portfolio filter
+    const filterButtons = document.querySelectorAll('.portfolio-controls button');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+        portfolioItems.forEach(item => {
+          if (filter === 'all' || item.getAttribute('data-category') === filter) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+    // Parallax Hero
+    window.addEventListener('scroll', function() {
+      const hero = document.querySelector('.hero');
+      let offset = window.pageYOffset;
+      hero.style.backgroundPositionY = offset * 0.5 + "px";
+    });
+  </script>
+
+</body>
+
+</html>
